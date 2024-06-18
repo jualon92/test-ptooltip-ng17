@@ -1,18 +1,17 @@
 <div class="legend-container">
   <div> Angular 17 + primeng 17.18.1 </div>
   <div> Press escape to trigger a change detection cycle</div>
-  <div style="margin-bottom:2em; font-weight:bolder" > elements rendered: {{QTY_ELEMENTS}} . Total Change detection cycles: {{ changeDetectionCount }} </div>
+  <div style="margin-bottom:2em; font-weight:bolder"> elements rendered: {{QTY_ELEMENTS}} . Total Change detection
+    cycles: {{ changeDetectionCount }} </div>
 
   <!--  <div> Cycles after  key press: {{ cyclesAfterKeyPress }}</div> -->
   <div class="card flex justify-content-center">
-    <p-checkbox 
-        [(ngModel)]="checked" 
-        [binary]="true" 
-        inputId="binary" />
-        <label for="binary">Use p-tooltip</label>
-</div>
 
-<div >
+    <p-selectButton [options]="stateOptions" [(ngModel)]="selectedState" optionLabel="label" optionValue="value" />
+
+  </div>
+
+  <!-- <div >
   <span>
 
     <p-floatLabel>
@@ -22,26 +21,30 @@
     </p-floatLabel>
 
 
-
+    
   </span>
 
 
     
+</div> -->
 </div>
-</div>
- 
+
 
 
 @for (item of [].constructor(QTY_ELEMENTS); track item; let i = $index) {
 
-  @if (checked) {
-    <p-button [pTooltip]="'tooltip ' + i" label=" {{i}} " icon="pi pi-check"> </p-button>
+@if (selectedState === 0) {
+<p-button label=" {{i}} " icon="pi pi-check"> </p-button>
 
-  }
-  @else {
-    <p-button  label=" {{i}} " icon="pi pi-check"> </p-button>
 
-  }
- 
+}
+@else if (selectedState === 1) {
+<p-button [pTooltip]="'tooltip ' + i" label=" {{i}} " icon="pi pi-check"> </p-button>
+
+}
+@else {
+<p-button [ngxTippy]="'tooltip ' + i" label=" {{i}} " icon="pi pi-check"> </p-button>
+}
+
 
 }
